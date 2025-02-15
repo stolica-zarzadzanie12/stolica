@@ -1,0 +1,100 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Tytuł", name: "title", widget: "string"}
+      - {label: "Slug", name: "slug", widget: "string"}
+      - {label: "Data publikacji", name: "date", widget: "datetime"}
+      - {label: "Zdjęcie wyróżniające", name: "featured_image", widget: "image", required: false}
+      - {label: "Zajawka", name: "excerpt", widget: "text"}
+      - {label: "Treść", name: "body", widget: "markdown"}
+      - {label: "Meta tytuł", name: "meta_title", widget: "string"}
+      - {label: "Meta opis", name: "meta_description", widget: "text"}
+      - {label: "Status", name: "status", widget: "select", options: ["draft", "published"]}
+      - label: "Kategorie"
+        name: "categories"
+        widget: "relation"
+        collection: "categories"
+        search_fields: ["name"]
+        value_field: "id"
+        display_fields: ["name"]
+        multiple: true
+      - label: "Tagi"
+        name: "tags"
+        widget: "relation"
+        collection: "tags"
+        search_fields: ["name"]
+        value_field: "id"
+        display_fields: ["name"]
+        multiple: true
+
+  - name: "categories"
+    label: "Kategorie"
+    folder: "content/categories"
+    create: true
+    fields:
+      - {label: "Nazwa", name: "name", widget: "string"}
+      - {label: "Slug", name: "slug", widget: "string"}
+      - {label: "Opis", name: "description", widget: "text", required: false}
+
+  - name: "tags"
+    label: "Tagi"
+    folder: "content/tags"
+    create: true
+    fields:
+      - {label: "Nazwa", name: "name", widget: "string"}
+      - {label: "Slug", name: "slug", widget: "string"}
+
+  - name: "pages"
+    label: "Strony"
+    files:
+      - file: "content/pages/home.md"
+        label: "Strona główna"
+        name: "home"
+        fields:
+          - {label: "Tytuł", name: "title", widget: "string"}
+          - {label: "Meta tytuł", name: "meta_title", widget: "string"}
+          - {label: "Meta opis", name: "meta_description", widget: "text"}
+          - {label: "Treść", name: "body", widget: "markdown"}
+      
+      - file: "content/pages/about.md"
+        label: "O nas"
+        name: "about"
+        fields:
+          - {label: "Tytuł", name: "title", widget: "string"}
+          - {label: "Meta tytuł", name: "meta_title", widget: "string"}
+          - {label: "Meta opis", name: "meta_description", widget: "text"}
+          - {label: "Treść", name: "body", widget: "markdown"}
+
+  - name: "settings"
+    label: "Ustawienia"
+    files:
+      - file: "content/settings/general.json"
+        label: "Ustawienia ogólne"
+        name: "general"
+        fields:
+          - {label: "Nazwa strony", name: "site_title", widget: "string"}
+          - {label: "Opis strony", name: "site_description", widget: "text"}
+          - {label: "Logo", name: "logo", widget: "image", required: false}
+          - {label: "Favicon", name: "favicon", widget: "image", required: false}
+          - {label: "Email kontaktowy", name: "contact_email", widget: "string"}
+          - {label: "Telefon kontaktowy", name: "contact_phone", widget: "string"}
+          - {label: "Adres", name: "address", widget: "text"}
+          - label: "Social Media"
+            name: "social_media"
+            widget: "object"
+            fields:
+              - {label: "Facebook", name: "facebook", widget: "string", required: false}
+              - {label: "Instagram", name: "instagram", widget: "string", required: false}
+              - {label: "LinkedIn", name: "linkedin", widget: "string", required: false}
+              - {label: "YouTube", name: "youtube", widget: "string", required: false}

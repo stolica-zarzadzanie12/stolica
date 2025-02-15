@@ -1,0 +1,9 @@
+# Force HTTPS
+http://* https://:splat 301!
+
+# Handle www subdomain
+http://www.stolica-zarzadzanienieruchomosciami.pl/* https://stolica-zarzadzanienieruchomosciami.pl/:splat 301!
+https://www.stolica-zarzadzanienieruchomosciami.pl/* https://stolica-zarzadzanienieruchomosciami.pl/:splat 301!
+
+# SPA fallback
+/* /index.html 200

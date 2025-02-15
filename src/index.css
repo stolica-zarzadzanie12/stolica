@@ -1,0 +1,750 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mobile-first base styles */
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-width: 320px;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optymalizacja wydajności */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Optymalizacja obrazów */
+img {
+  content-visibility: auto;
+  contain: content;
+}
+
+/* Optymalizacja animacji */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Base typography */
+:root {
+  --h1-size-desktop: 3rem;
+  --h1-size-tablet: 2.5rem;
+  --h1-size-mobile: 2rem;
+  --h1-size-hero-desktop: clamp(2.5rem, 5vw, 4rem);
+  --h1-size-hero-tablet: clamp(2rem, 4vw, 3rem);
+  --h1-size-hero-mobile: clamp(1.75rem, 3vw, 2.25rem);
+  --h1-line-height: 1.2;
+  --text-scale-ratio: 1.2;
+  --container-padding: clamp(1rem, 5vw, 2rem);
+}
+
+/* Responsive typography */
+h1, .h1 {
+  font-size: var(--h1-size-desktop);
+  color: #FFFFFF;
+  line-height: var(--h1-line-height);
+  margin-bottom: 1em;
+  font-weight: 700;
+  transform: translateZ(0); /* Performance optimization */
+  will-change: transform; /* GPU acceleration hint */
+  transition: font-size 0.3s ease;
+}
+
+/* Tablet styles */
+@media (max-width: 1024px) {
+  h1, .h1 {
+    font-size: var(--h1-size-tablet);
+    margin-bottom: 0.8em;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 640px) {
+  /* Improved container padding */
+  .container {
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+  }
+
+  /* Better text readability */
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+  }
+
+  /* Improved button touch targets */
+  button,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.75rem 1rem;
+    touch-action: manipulation;
+  }
+
+  /* Better form inputs */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    -webkit-appearance: none;
+  }
+
+  /* Improved grid layouts */
+  .grid {
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  /* Better card layouts */
+  .card {
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+
+  /* Improved navigation */
+  .mobile-nav {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+  }
+
+  /* Better spacing */
+  .space-y-8 > * + * {
+    margin-top: 1rem;
+  }
+
+  /* Improved images */
+  img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* Optymalizacja renderowania */
+  .container {
+    content-visibility: auto;
+    contain: content;
+  }
+
+  h1:not(.hero h1), .h1:not(.hero .h1) {
+    font-size: clamp(1.75rem, 5vw, var(--h1-size-mobile));
+    margin-bottom: 0.8em;
+    line-height: 1.3;
+  }
+  
+  .hero h1 {
+    font-size: clamp(2rem, 6vw, var(--h1-size-hero-mobile));
+    line-height: 1.3;
+  }
+  
+  .section-title h1 {
+    font-size: clamp(1.75rem, 5vw, var(--h1-size-mobile));
+    line-height: 1.4;
+  }
+
+  /* Improve mobile spacing */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Better touch targets */
+  button, 
+  a {
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+  }
+
+  /* Improved mobile grid layouts */
+  .grid {
+    gap: 1rem;
+  }
+
+  /* Better mobile navigation */
+  .mobile-nav {
+    padding: 1rem;
+  }
+
+  /* Enhanced mobile form elements */
+  input,
+  select,
+  textarea {
+    font-size: 16px; /* Prevents iOS zoom */
+    padding: 0.75rem;
+  }
+
+  /* Mobile-optimized cards */
+  .card {
+    padding: 1rem;
+  }
+
+  /* Improved mobile tables */
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Better mobile images */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Mega menu animation */
+@keyframes megaMenuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mega menu styles */
+.mega-menu-enter {
+  opacity: 0;
+  transform: translateY(-0.5rem);
+}
+
+.mega-menu-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 200ms ease-out, transform 200ms ease-out;
+}
+
+.mega-menu-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mega-menu-exit-active {
+  opacity: 0;
+  transform: translateY(-0.5rem);
+  transition: opacity 150ms ease-in, transform 150ms ease-in;
+}
+
+@keyframes megaMenuOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+}
+
+/* Mobile-first media queries */
+@media (min-width: 640px) {
+  /* Improved container sizing */
+  /* Optymalizacja renderowania dla większych ekranów */
+  .container {
+    content-visibility: auto;
+    contain: content;
+  }
+
+  .container {
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+    max-width: min(100%, 1280px);
+    margin: 0 auto;
+  }
+}
+
+/* Improved touch interactions */
+@media (hover: none) {
+  .hover\:shadow-lg:hover {
+    box-shadow: none;
+  }
+  
+  .hover\:bg-opacity-30:hover {
+    background-opacity: 20%;
+  }
+}
+
+/* Better mobile performance */
+@media (prefers-reduced-motion: no-preference) {
+  /* Optymalizacja animacji */
+  * {
+    will-change: auto;
+  }
+
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Mobile-optimized hero sections */
+@media (max-width: 640px) {
+  /* Better hero section */
+  .hero {
+    min-height: 100vh;
+    padding-top: 6rem;
+    padding-bottom: 3rem;
+    background-attachment: scroll;
+  }
+
+  /* Improved hero content */
+  .hero-content {
+    padding: 1rem;
+    text-align: left;
+  }
+
+  /* Better button layout */
+  .hero-buttons {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  /* Full-width buttons */
+  .hero-button {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* Mobile-optimized grids */
+@media (max-width: 640px) {
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .md\:grid-cols-2,
+  .md\:grid-cols-3,
+  .md\:grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile-optimized spacing */
+@media (max-width: 640px) {
+  /* Better section spacing */
+  .py-20 {
+    padding-top: clamp(2rem, 5vw, 3rem);
+    padding-bottom: clamp(2rem, 5vw, 3rem);
+  }
+
+  /* Improved horizontal padding */
+  .px-8 {
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+  }
+
+  /* Better grid gaps */
+  .gap-8 {
+    gap: clamp(1rem, 3vw, 2rem);
+  }
+
+  /* Improved vertical spacing */
+  .space-y-8 > * + * {
+    margin-top: clamp(1rem, 3vw, 2rem);
+  }
+}
+
+/* Mobile-optimized text */
+@media (max-width: 640px) {
+  /* Better text scaling */
+  .text-4xl {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+  }
+
+  .text-2xl {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+  }
+
+  .text-xl {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* Hero specific styles */
+.hero h1 {
+  font-size: var(--h1-size-hero-desktop);
+  padding-top: 3rem;
+}
+
+@media (max-width: 1024px) {
+  .hero h1 {
+    font-size: var(--h1-size-hero-tablet);
+    padding-top: 2rem;
+  }
+}
+
+/* Custom color classes with improved contrast */
+.text-primary {
+  color: #B8860B; /* Darker gold for better contrast on light backgrounds */
+}
+
+.bg-primary {
+  background-color: #B8860B;
+}
+
+.hover\:bg-primary-light:hover {
+  background-color: #D4AF37;
+}
+
+.text-secondary {
+  color: #1A1A1A; /* Darker text for better contrast */
+}
+
+.bg-secondary {
+  background-color: #1A1A1A;
+}
+
+/* Improved contrast for text on dark backgrounds */
+.dark-section {
+  color: #FFFFFF;
+}
+
+.dark-section-secondary {
+  color: #E0E0E0;
+}
+
+/* Hero section text shadow for better contrast */
+.hero-text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8),
+               0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Base animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Dropdown animation */
+.dropdown-enter {
+  opacity: 0;
+  transform: translateY(-0.5rem);
+  pointer-events: none;
+}
+
+.dropdown-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 200ms ease-out, transform 200ms ease-out;
+  pointer-events: auto;
+}
+
+.dropdown-exit {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown-exit-active {
+  opacity: 0;
+  transform: translateY(-0.5rem);
+  transition: opacity 150ms ease-in, transform 150ms ease-in;
+  pointer-events: none;
+}
+
+/* Dropdown menu styles */
+.dropdown-menu {
+  position: absolute;
+  left: 0;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-0.5rem);
+  transition: all 200ms ease-out;
+  z-index: 1000;
+  margin-top: -0.5rem;
+}
+
+.dropdown-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+  z-index: 9999;
+}
+
+/* Dropdown overlay */
+.dropdown-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 200ms ease-out;
+}
+
+.dropdown-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-10deg) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.8s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.8s ease-out;
+}
+
+.animate-rotate-in {
+  animation: rotateIn 0.8s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.4s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.4s ease-out;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Intersection Observer animations */
+.reveal {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+.reveal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.reveal-fade-up {
+  transform: translateY(30px);
+}
+
+.reveal-fade-up.active {
+  transform: translateY(0);
+}
+
+.reveal-fade-right {
+  transform: translateX(-30px);
+}
+
+.reveal-fade-right.active {
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  transform: scale(0.9);
+}
+
+.reveal-scale.active {
+  transform: scale(1);
+}
+
+.reveal-rotate {
+  transform: rotate(-10deg) scale(0.95);
+}
+
+.reveal-rotate.active {
+  transform: rotate(0) scale(1);
+}
+
+/* Stagger delays for child elements */
+.stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.stagger.active > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger.active > *:nth-child(1) { transition-delay: 0.1s; }
+.stagger.active > *:nth-child(2) { transition-delay: 0.2s; }
+.stagger.active > *:nth-child(3) { transition-delay: 0.3s; }
+.stagger.active > *:nth-child(4) { transition-delay: 0.4s; }
+.stagger.active > *:nth-child(5) { transition-delay: 0.5s; }
+.stagger.active > *:nth-child(6) { transition-delay: 0.6s; }
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-count-up {
+  animation: countUp 1s ease-out forwards;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Performance optimizations */
+.parallax {
+  will-change: auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  contain: paint;
+}
+
+/* React Quill Editor Styles */
+.quill {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.ql-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.ql-editor {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Improve toolbar appearance */
+.ql-toolbar {
+  flex: 0 0 auto;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  background-color: #fafafa;
+  border-color: #e5e7eb;
+}
+
+.ql-container {
+  flex: 1 1 auto;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  border-color: #e5e7eb;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .stagger > *,
+  .parallax,
+  .animate-fade-in,
+  .animate-fade-in-up,
+  .animate-fade-in-right,
+  .animate-scale-in,
+  .animate-rotate-in,
+  .animate-slide-in-left,
+  .animate-slide-in-right,
+  .animate-slide-down {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  html {
+    scroll-behavior: auto !important;
+  }
+}
